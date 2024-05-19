@@ -1,30 +1,15 @@
 # YuliaTarima_Chapter11_Assignment1
 
 """
-This application is used to pre-sell a limited number of cinema tickets.
- Each buyer can buy up to 4 tickets.
- No more than 20 tickets can be sold total.
+This application is to pre-sell a limited number of cinema tickets.
+No more than total available tickets (20) can be sold.
+Each buyer can buy up to 4 tickets.
 
- The user is prompted for the desired number of tickets.
- Then the number of remaining tickets after their purchase is displayed.
- This repeats until all tickets have been sold.
+User is prompted for the desired number of tickets.
+After their purchase, number of remaining tickets is displayed.
 
- Finally, the total number of buyers is displayed.
-
-Please use the following in your code:
-
-
-2. input
-3. output
-
-5. if statement
-6. loop
-
-You must also have a text document as a technical design document
-(refer to the Submitting Assignments Module).
-
-Submit both your .py file and .txt file in this assignment
-and these files must also be in your repository.
+Process repeats until all tickets have been sold,
+after which the total number of buyers is displayed.
 """
 
 
