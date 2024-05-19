@@ -1,0 +1,24 @@
+This application is used to pre-sell a limited number of cinema tickets.
+ Each buyer can buy up to 4 tickets.
+ No more than 20 tickets can be sold total.
+
+ The user is prompted for the desired number of tickets.
+ Then the number of remaining tickets after their purchase is displayed.
+ This repeats until all tickets have been sold.
+
+ Finally, the total number of buyers is displayed.
+
+Please use the following in your code:
+
+1. function
+2. input
+3. output
+4. accumulator
+5. if statement
+6. loop
+
+You must also have a text document as a technical design document
+(refer to the Submitting Assignments Module).
+
+Submit both your .py file and .txt file in this assignment
+and these files must also be in your repository.
