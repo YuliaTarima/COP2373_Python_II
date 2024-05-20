@@ -1,0 +1,36 @@
+
+Technical Design Document
+
+Yulia Tarima, 05/19/2024
+https://github.com/YuliaTarima/COP2373_Python_II.git
+
+This program simulates a Magic 8 Ball.
+It creates a file with predefined responses, reads these responses,
+prompts the user for a yes/no question,
+and displays a random response until the user decides to quit.
+
+Variables:
+responses
+  stores the list of predefined responses.
+file
+  represents the file object for 8ball_responses.txt during operations.
+question
+  stores the user's yes/no question and checks for the quit condition.
+
+Functions:
+The read_responses_file_into_list function
+  opens the 8ball_responses.txt file and reads its contents
+  into a list, splitting lines by newline characters.
+The create_responses_file function
+  creates a file named 8ball_responses.txt
+  and writes a list of predefined Magic 8 Ball responses to it.
+The magic_8_ball is the main function
+  orchestrating the entire process of simulating the Magic 8 Ball toy.
+  It calls the above functions to set up the responses
+  by creating a file with predefined responses,
+  a then reading these responses into a list.
+  It then enters a loop where it interacts with the user
+  by prompting them to ask a yes/no question.
+  If the user types 'quit', the loop breaks, and the program ends.
+  Otherwise, a random response is selected from the list
+  and displayed to the user.
