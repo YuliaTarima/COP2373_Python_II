@@ -1,0 +1,54 @@
+
+ Technical Design Document
+
+ Yulia Tarima, 05/26/2024
+ https://github.com/YuliaTarima/COP2373_Python_II.git
+
+This application lists 30 words and phrases
+commonly found in spam messages.
+It prompts the user to enters an email message and then
+scans the message for each of the 30 keywords or phrases.
+For each occurrence of one of these within the message,
+a point to the message's "spam score" is added.
+Next, it calculates the likelihood that the message is spam,
+based on the number of points received.
+Then, it displays the user's spam score,
+the likelihood of message being a spam,
+and the words/phrases which caused it to be spam.
+
+Variables:
+spam_keywords
+    is a list of 30 common words and phrases found in spam messages.
+email_message
+    lower-case converted email message entered by the user.
+ spam_score
+    accumulator for number of each occurrence of spam_keywords list item in email.
+flagged_keywords
+    list that collects each word of spam_keywords list found in email
+spam_likelihood
+    the likelihood of the email message being spam, based on the spam score.
+
+Functions:
+calculate_spam_score function
+    calculates the spam score of the email message
+    by checking each keyword in the spam_keywords list
+    for presence in the input email message.
+    For each occurrence of a keyword in the message,
+    it increments the spam score by 1
+    and collects the flagged keywords in a list.
+    It returns the accumulated spam score and the list of flagged keywords.
+
+determine_spam_likelihood function
+    evaluates the likelihood of the email message being spam
+    based on the spam score: for 10 or higher it returns "High",
+    for the spam score between 5 and 9, it returns "Medium",
+    otherwise, it returns "Low".
+
+main is the main function of the program.
+    It prompts the user to enter an email message,
+    converts the message to lowercase,
+    calculates the spam score and flagged keywords
+    using calculate_spam_score(),
+    evaluates the spam likelihood using determine_spam_likelihood(),
+    and displays to the user the message containing
+    spam score, likelihood, and flagged keywords.
