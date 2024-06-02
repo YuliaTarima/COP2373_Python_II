@@ -1,4 +1,4 @@
-# YuliaTarima_Chapter11_Assignment1
+# YuliaTarima_Chapter1_Assignment1B
 
 """
 This program simulates a Magic 8 Ball - a fortune-telling toy

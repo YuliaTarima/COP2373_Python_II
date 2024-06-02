@@ -1,4 +1,4 @@
-# YuliaTarima_Chapter11_Assignment1
+# YuliaTarima_Chapter1_Assignment1A
 
 """
 This application is to pre-sell a limited number of cinema tickets.

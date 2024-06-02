@@ -1,4 +1,4 @@
-# YuliaTarima_Chapter3_AssignmentA
+# YuliaTarima_Chapter2_Assignment2A
 
 """
 This application lists 30 words and phrases

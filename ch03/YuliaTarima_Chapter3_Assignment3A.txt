@@ -1,0 +1,57 @@
+
+ Technical Design Document
+
+ Yulia Tarima, 06/02/2024
+ https://github.com/YuliaTarima/COP2373_Python_II.git
+
+This application prompts for a list of user's monthly expenses:
+first, type of expense and then the amount.
+It uses the reduce method to analyze the expenses
+and display the total expense,
+the highest expense and the lowest expense.
+It labels what is the highest and lowest expense.
+
+Variables:
+    get_expenses Function:
+        expenses (list of tuples)
+            Stores the list of expenses where each expense is a tuple
+            containing the expense type and amount.
+        expense_type (string)
+            Temporarily holds the expense type entered by the user.
+        amount (float)
+            Temporarily holds the expense amount entered by the user.
+    analyze_expenses Function:
+        total_expense (float)
+            Stores the total amount of all expenses.
+        highest_expense (tuple (string, float))
+            Stores the tuple of the highest expense (type, amount).
+        lowest_expense(tuple (string, float))
+            Stores the tuple of the lowest expense (type, amount).
+    main Function:
+        expenses (list of tuples)
+            Receives list of expenses from get_expenses function.
+        total (float)
+            Receives total amount of all expenses
+            from analyze_expenses function.
+        highest (tuple (string, float))
+            Receives the tuple of the highest expense
+            from analyze_expenses function.
+        lowest (tuple (string, float))
+            Receives the tuple of the lowest expense
+            from analyze_expenses function.
+
+Functions:
+    get_expenses
+        Collects user input for expense type and amount.
+        Adds each expense as a tuple to the expenses list.
+        Returns the list of expenses.
+    analyze_expenses
+        Uses reduce to calculate the total expense.
+        Uses reduce to find the highest expense.
+        Uses reduce to find the lowest expense.
+        Returns the total, highest, and lowest expenses.
+    main
+        Calls get_expenses to get the list of expenses.
+        Calls analyze_expenses
+        to get the total, highest, and lowest expenses.
+        Prints the total, highest, and lowest expenses.
