@@ -1,0 +1,91 @@
+
+ Technical Design Document
+
+ Yulia Tarima, 06/16/2024
+ https://github.com/YuliaTarima/COP2373_Python_II.git
+
+This application reads the text, then it displays the sentences
+and counts the number of sentences contained within the text.
+
+It uses a regular expression with “The Look-Ahead Feature”
+to read multiple sentences and determine
+the number of sentences—within complicated text.
+The pattern also can read sentences with multiple spaces between them,
+and sentences that begin with numbers.
+
+Variables:
+    pattern:
+        Purpose: Stores the regular expression pattern
+        used to match sentences in the text.
+        Type: String (str)
+        Description: This variable defines the pattern
+        that identifies sentences starting with a capital letter
+        or a number and ending with a period, exclamation mark,
+        or question mark, optionally followed by another sentence
+        starting with a capital letter.
+    text:
+        Purpose: Holds the input text from which sentences are extracted.
+        Type: String (str)
+        Description: This variable contains the text input,
+        which may include multiple sentences,
+        including sentences starting with numbers and varying punctuation.
+    matches:
+        Purpose: Stores the list of matched sentences found in the input text.
+        Type: List of strings (List[str])
+        Description: After executing
+        re.findall(pattern, text, flags=re.DOTALL | re.MULTILINE),
+        this variable holds all sentences that match
+        the specified pattern in the text.
+        Each element in matches is a string representing a matched sentence.
+    re.DOTALL | re.MULTILINE (flags):
+        Purpose: modify regex behavior for multiline and dotall matching.
+        Type: Integer (int)
+        Description:
+        re.DOTALL: Allows the dot (.) to match any character,
+        including newline (\n),
+        which ensures that the pattern can span multiple lines.
+        re.MULTILINE: Changes the behavior of ^ and $ to match
+        at the start and end of each line within the text,
+        not just at the start and end of the entire text.
+
+Functions:
+    getSentences(text):
+        Purpose: Extracts sentences from the input text
+        based on a regular expression pattern.
+        Parameters: text (str): The input text from which sentences are extracted.
+        Returns: List[str]: A list of sentences that match the specified pattern.
+        Description: Uses a regular expression pattern
+        to find sentences that can start with a capital letter
+        or a number, followed by any content up to a period,
+        exclamation mark, or question mark.
+        The sentence may be followed by a space and another
+        capital letter/digit or be at the end of the string.
+        Utilizes re.findall() with re.DOTALL | re.MULTILINE flags
+        to match sentences spanning multiple lines and starting with numbers.
+    main():
+        Purpose: Main function to demonstrate the usage
+        of getSentences() with hard-coded text.
+        Description: Hard-codes a multi-line text string for demonstration.
+        Calls getSentences() to extract sentences from the hard-coded text.
+        Prints each extracted sentence
+        and then displays the total number of sentences found.
+
+Pattern:
+    [A-Z0-9]:
+        Purpose: Matches the beginning of a sentence,
+        which can start with either an uppercase letter (A-Z) or a digit (0-9).
+    .*?:
+        Purpose: Matches any character (except newline) zero or more times,
+        but in a non-greedy way to allows for any content between
+        the start of the sentence (after the initial capital letter or number)
+        and its ending punctuation (. or ! or ?).
+    [.!?]:
+        Purpose: Matches a single character that is either a period (.),
+        exclamation mark (!), or question mark (?) to specify
+        the possible endings of a sentence.
+    (?=\s+[A-Z0-9]|$):
+        Purpose: Positive lookahead assertion to ensure specific conditions
+        follow the ending punctuation.
+        It checks that after the punctuation ([.!?]), either there is
+        a space (\s+) followed by another uppercase letter or digit ([A-Z0-9]).
+        Or, it's the end of the string ($).

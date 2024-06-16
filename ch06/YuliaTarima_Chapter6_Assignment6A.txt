@@ -1,0 +1,82 @@
+
+ Technical Design Document
+
+ Yulia Tarima, 06/16/2024
+ https://github.com/YuliaTarima/COP2373_Python_II.git
+
+This application prompts the user for a phone number,
+SSN, and zip code to be entered in a specific format.
+Then it validates the entries using regular expressions
+and displays the validation results to the user.
+
+Variables:
+    phone (in validate_phone_number function):
+        Purpose: To hold the phone number input provided by the user for validation.
+        Type: String
+    phone (in main function):
+        Purpose: To hold the phone number input provided by the user.
+        Type: String
+    ssn (in validate_ssn function):
+        Purpose: To hold the social security number input provided by the user for validation.
+        Type: String
+    ssn (in main function):
+        Purpose: To hold the social security number input provided by the user.
+        Type: String
+    zip_code (in validate_zip_code function):
+        Purpose: To hold the zip code input provided by the user for validation.
+        Type: String
+    zip_code (in main function):
+        Purpose: To hold the zip code input provided by the user.
+        Type: String
+    pattern (in validate_phone_number, validate_ssn, and validate_zip_code functions):
+        Purpose: To store the compiled regular expression pattern used for matching the input data.
+        Type: Compiled regular expression pattern (re.Pattern)
+
+Functions:
+    validate_phone_number
+        Purpose: To validate a phone number using a regular expression pattern.
+        Parameters: phone - a string representing the phone number to be validated.
+        Returns: True if the phone number matches the pattern, otherwise False.
+        Description: This function uses a regular expression to check if the phone
+        number follows the format XXX-XXX-XXXX.
+    validate_ssn
+        Purpose: To validate a social security number (SSN) using a regular expression pattern.
+        Parameters: ssn - a string representing the SSN to be validated.
+        Returns: True if the SSN matches the pattern, otherwise False.
+        Description: This function uses a regular expression to check if the SSN follows
+        the format XXX-XX-XXXX.
+    validate_zip_code
+        Purpose: To validate a zip code using a regular expression pattern.
+        Parameters: zip_code - a string representing the zip code to be validated.
+        Returns: True if the zip code matches the pattern, otherwise False.
+        Description: This function uses a regular expression to check if the zip code
+        follows the formats XXXXX or XXXXX-XXXX.
+    main
+        Purpose: To get input from the user for phone number, SSN, and zip code, and display
+        whether each is valid.
+        Parameters: None
+        Returns: None
+        Description: This function prompts the user to enter a phone number, SSN, and zip code.
+        It then validates each input using the respective validation functions and prints
+        whether each input is valid or not.
+
+Code Flow Summary:
+    1. Program Start: The program starts execution from the main function.
+    2. Input Phase: Collect phone number, SSN, and zip code from the user.
+        The program prompts the user to enter three different pieces of information:
+            - Phone number in the format XXX-XXX-XXXX
+            - Social security number (SSN) in the format XXX-XX-XXXX
+            - Zip code in the format XXXXX or XXXXX-XXXX
+        These inputs are stored in variables phone, ssn, and zip_code, respectively.
+    3. Validation Phase: Validate each input using respective functions with regular expressions.
+        The entered phone number is passed to the validate_phone_number function,
+        SSN - to the validate_ssn function, and zip code - to the validate_zip_code function.
+        All three function validate based on the regular expression match,
+        and return True for match or False otherwise.
+    4. Output Phase: Display validation results for each input.
+        The validation results for the user entered phone number, SSN, and zip code
+        are displayed based on the return value from validate_phone_number,
+        validate_ssn, and validate_zip_code.
+    5. End: Program completes execution.
+        After displaying the validation results,
+        the main function completes its execution, and the program terminates.
