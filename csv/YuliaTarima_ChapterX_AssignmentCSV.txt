@@ -1,0 +1,74 @@
+
+ Technical Design Document
+
+ Yulia Tarima, 06/30/2024
+ https://github.com/YuliaTarima/COP2373_Python_II.git
+
+This application aids to an instructor that teaches a class
+in which each student takes three exams.
+
+The program allows an instructor to input
+first and last name as strings
+and three exam grades as integers
+per student
+for the unlimited number of students.
+
+The information is stored in a grades.csv file for later use.
+The csv module is used to write each record into the grades.csv file
+with a header of First Name, Last Name, Exam 1, Exam 2 and Exam3.
+Each student represents a record in the grades.csv file.
+
+A separate program reads the grades.csv file and displays the data
+in tabular format.
+
+Variables:
+    Variables in input_valid_name function:
+        input_type: Represents whether the input is for the "first" name or "last" name. It's used in prompts and error messages to specify which name the user is expected to input.
+        name: Stores the user input for the student's first or last name after validation. It ensures that the input contains only alphabetic characters.
+    Variables in input_valid_grade function:
+        exam_number: Indicates which exam's grade is being inputted (1, 2, or 3). This is used in prompts and error messages to specify which exam the user is entering a grade for.
+        grade: Stores the user input for the student's grade after validation. It ensures that the input is numeric and non-negative.
+    Variables in input_student_grades function:
+        file: Represents the file object opened with open('grades.csv', 'w', newline=''). It's used to interact with the CSV file where student grades will be stored.
+        writer: Represents the CSV writer object created with csv.writer(file). It facilitates writing rows of data (student information) to the CSV file.
+        first_name, last_name: Store the validated first and last names of each student as they are inputted by the user.
+        exam1, exam2, exam3: Store the validated grades for the three exams of each student as they are inputted by the user.
+        add_another: Stores the user's input to determine if they want to add another student after entering data for one student. It's used to control the loop that continues inputting student data or stops it based on the user's response.
+
+Functions:
+    input_valid_name(input_type) Function:
+        Purpose: Validates and returns a user-inputted name.
+        Parameters:
+        input_type: Indicates whether the input is for the "first" name or "last" name.
+        Functionality:
+        Continuously prompts the user to enter a name containing only alphabetic characters.
+        If the input is valid (contains only letters), it returns the validated name.
+        If the input is invalid (contains non-alphabetic characters), it prompts the user again until a valid name is entered.
+    input_valid_grade(exam_number) Function:
+        Purpose: Validates and returns a user-inputted grade for an exam.
+        Parameters:
+        exam_number: Indicates which exam's grade is being inputted (1, 2, or 3).
+        Functionality:
+        Prompts the user to enter a grade for the specified exam number.
+        Validates that the input is a numeric value (integer or float).
+        Ensures that the grade is non-negative (greater than or equal to 0).
+        If the input is valid, it returns the validated grade.
+        If the input is invalid (not numeric or negative), it prompts the user again until a valid grade is entered.
+    input_student_grades() Function:
+        Purpose: Manages the input of student information and writes it to a CSV file.
+        Functionality:
+        Opens a CSV file named grades.csv in write mode ('w').
+        Creates a CSV writer object to handle writing rows of data to the file.
+        Prompts the user to input the number of students they want to enter (this part could be modified based on recent changes discussed).
+        Loops indefinitely to input data for each student:
+        Calls input_valid_name("first") and input_valid_name("last") to get and validate the student's first and last names.
+        Calls input_valid_grade(1), input_valid_grade(2), and input_valid_grade(3) to get and validate grades for three exams.
+        Writes the student's data (first name, last name, and exam grades) as a new row in the CSV file using the CSV writer object.
+        Asks the user if they want to add another student. If the user does not want to add another student, breaks out of the loop.
+        After finishing input for all students, closes the CSV file.
+        Prints a confirmation message indicating that grades have been successfully written to grades.csv.
+    Main Program (if __name__ == "__main__": block):
+        Purpose: Entry point of the program.
+        Functionality:
+        Executes input_student_grades() function to start the process of inputting student data and writing it to the CSV file.
+        This block ensures that the program begins execution from this point when the script is run directly.
