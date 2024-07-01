@@ -139,7 +139,7 @@ Functions/Methods:
             Returns: A formatted string containing the account holder's name, account number,
             current balance, and interest rate.
             Usage: Provides a human-readable summary of the bank account's details.
-    Functions in the TestBankAcct Class
+    Functions/Methods in the TestBankAcct Class
         setUp(self):
             Description: Sets up the test case with an initial bank account instance.
             This method is called before every individual test method.
