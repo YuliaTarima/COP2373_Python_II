@@ -1,0 +1,179 @@
+
+ Technical Design Document
+
+ Yulia Tarima, 06/30/2024
+ https://github.com/YuliaTarima/COP2373_Python_II.git
+
+This program creates a BankAcct Class
+with the following state information:
+    name,
+    account number,
+    amount
+    interest rate.
+
+In addition to an __init__ method,
+the BankAcct Class supports methods for:
+    adjusting the interest rate,
+    withdrawing and depositing,
+    giving a balance,
+    calculating the interest earned based on the number of days.
+The __str__ method is used to display balances and interest amounts.
+
+The program contains unit tests for methods in the BankAcct Class.
+
+
+Variables:
+    Variables in the BankAcct Class
+        name:
+            Type: str
+            Description: The name of the account holder.
+            Usage: Stored as an instance variable and initialized
+            in the __init__ method.
+        account_number:
+            Type: str
+            Description: The account number of the bank account.
+            Usage: Stored as an instance variable and initialized
+            in the __init__ method.
+        amount:
+            Type: float
+            Description: The current balance of the bank account.
+            Usage: Stored as an instance variable and initialized
+            in the __init__ method. Updated by the withdrawal, deposit,
+            and calculate_interest methods.
+        interest_rate:
+            Type: float
+            Description: The interest rate applied to the bank account.
+            Usage: Stored as an instance variable and initialized
+            in the __init__ method.
+            Can be updated by the adjust_interest_rate method.
+    Variables in the TestBankAcct Class
+        self.account:
+            Type: BankAcct
+            Description: An instance of BankAcct class used for testing.
+            Usage: Initialized in the setUp method and used
+            in various test methods to test the functionality
+            of the BankAcct class.
+        success:
+            Type: bool
+            Description: A boolean variable indicating whether
+            an operation (withdrawal or deposit) was successful.
+            Usage: Stores the return value of withdraw or deposit
+            methods to check if the operation succeeded.
+            (used in test_withdraw_more_than_available,
+            test_deposit_zero, and test_deposit_negative)
+        interest (used in test_calculate_interest):
+            Type: float
+            Description: The calculated interest for a given number
+            of days.
+            Usage: Stores the value returned by the calculate_interest
+            method for comparison with the expected interest.
+        expected_interest:
+            Type: float
+            Description: The expected interest amount calculated based
+            on the account's balance, interest rate, and number of days.
+            Usage: Used to compare against the value returned by
+            the calculate_interest method.
+            (used in test_calculate_interest)
+        account_str:
+            Type: str
+            Description: The string representation of BankAcct instance.
+            Usage: Stores the return value of the __str__ method
+            for comparison with the expected string representation.
+            (used in test_str)
+        expected_str:
+            Type: str
+            Description: The expected string representation
+            of the BankAcct instance.
+            Usage: Used to compare against the value returned
+            by the __str__ method.
+            (used in test_str)
+
+Functions/Methods:
+    Functions/Methods in the BankAcct Class
+        __init__(self, name, account_number, initial_amount, interest_rate):
+            Description: This is the initializer method for
+            the BankAcct class. It sets up the initial state
+            of a new BankAcct instance.
+                Parameters:
+                    name: The name of the account holder.
+                    account_number: The account number of the bank account.
+                    initial_amount: The initial amount deposited into the bank account.
+                    interest_rate: The interest rate applied to the bank account.
+            Usage: Initializes the instance variables name, account_number, amount,
+            and interest_rate.
+        adjust_interest_rate(self, new_rate):
+            Description: Adjusts the interest rate of the bank account.
+                Parameters:
+                    new_rate: The new interest rate to be set.
+            Usage: Updates the interest_rate instance variable with the new rate.
+        withdraw(self, amount):
+            Description: Withdraws a specified amount from the bank account,
+            if sufficient funds are available.
+            Parameters:
+                amount: The amount to be withdrawn.
+            Returns: True if the withdrawal was successful, False otherwise.
+            Usage: Decreases the amount instance variable by the withdrawal
+            amount if the amount is greater than 0 and less than
+            or equal to the current balance.
+        deposit(self, amount):
+            Description: Deposits a specified amount into the bank account,
+            if the amount is positive.
+            Parameters:
+                amount: The amount to be deposited.
+            Returns: True if the deposit was successful, False otherwise.
+            Usage: Increases the amount instance variable by the deposit
+            amount if the amount is greater than 0.
+        balance(self):
+            Description: Returns the current balance of the bank account.
+            Returns: The current balance (amount instance variable) of the bank account.
+            Usage: Simply returns the amount instance variable.
+        calculate_interest(self, days):
+            Description: Calculates the interest earned over a specified number of days.
+            Parameters:
+                days: The number of days for which interest is to be calculated.
+            Returns: The interest earned over the specified number of days.
+            Usage: Computes the daily interest and multiplies it by the number
+            of days to get the total interest earned.
+        __str__(self):
+            Description: Returns a string representation of the bank account information.
+            Returns: A formatted string containing the account holder's name, account number,
+            current balance, and interest rate.
+            Usage: Provides a human-readable summary of the bank account's details.
+    Functions in the TestBankAcct Class
+        setUp(self):
+            Description: Sets up the test case with an initial bank account instance.
+            This method is called before every individual test method.
+            Usage: Creates a new BankAcct instance with predefined values
+            ("John Doe", "1234567890", 1000.0, 2.5) and assigns it to self.account.
+        Test Methods:
+            Description: These methods test various functionalities of the BankAcct class.
+            Each method starts with test_ and checks a specific aspect of the BankAcct class.
+            The assertEqual, assertFalse, and assertAlmostEqual methods are used to compare
+            actual outcomes with expected results.
+                test_initial_balance(self): Tests if the initial balance is correctly
+                set to 1000.0.
+                test_adjust_interest_rate(self): Tests if the interest rate adjustment
+                to 3.0 works correctly.
+                test_deposit(self): Tests if depositing 500.0 increases the balance to 1500.0.
+                test_deposit_zero(self): Tests if depositing 0 fails and the balance remains
+                unchanged.
+                test_deposit_negative(self): Tests if depositing a negative amount fails
+                and the balance remains unchanged.
+                test_withdraw(self): Tests if withdrawing 200.0 decreases the balance to 800.0.
+                test_withdraw_more_than_available(self): Tests if attempting to withdraw 1500.0
+                (more than the available balance) fails and the balance remains 1000.0.
+                test_calculate_interest(self): Tests if interest calculation over 30 days
+                works correctly, comparing the result to the expected interest.
+                test_str(self): Tests if the string representation of the account matches
+                the expected format.
+
+    Functions/Methods in the Main Script
+        main():
+            Description: The main function that runs the tests.
+            Usage: Prints a message indicating the start of tests and
+            runs the tests using unittest.main().
+        if __name__ == "__main__": main():
+            Description: Ensures that the main function is executed
+            only when the script is run directly, not when imported
+            as a module.
+            Usage: Calls the main function to execute the tests.

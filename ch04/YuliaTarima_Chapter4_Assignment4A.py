@@ -1,4 +1,4 @@
-# YuliaTarima_Chapter2_Assignment2A
+# YuliaTarima_Chapter4_Assignment4A
 
 """
 This application lists 30 words and phrases
@@ -12,7 +12,11 @@ based on the number of points received.
 Then, it displays the user's spam score,
 the likelihood of message being a spam,
 and the words/phrases which caused it to be spam.
+The program uses a timer to calculate how long the code runs for
+and displays the elapsed time at completion.
 """
+
+import time
 
 # Common spam keywords and phrases
 spam_keywords = ["free", "viagra", "make money fast",
@@ -58,11 +62,25 @@ def determine_spam_likelihood(spam_score):
         return "Low"
 
 
+# Function to record how long the code runs for
+def make_timer():
+    # holds the time at which make_timer() was called
+    start_time = time.time()
+    # anonymous function calculating difference between the start_time
+    # and current time (when the lambda function is called)
+    return lambda: time.time() - start_time
+
+
 def main():
     # Prompt user to enter email message
     # Convert message to lowercase for case-insensitive comparison
-    email_message = input(
-        "Enter your email message: ").lower()
+    email_message = input("Enter your email message: ").lower()
+
+    # Create timer function to measure execution time
+    timer = make_timer()
+
+    # Introduce some delay for demonstration purposes
+    time.sleep(1)
 
     # Calculate spam score and get flagged keywords
     spam_score, flagged_keywords = calculate_spam_score(email_message)
@@ -70,11 +88,16 @@ def main():
     # Determine spam likelihood
     spam_likelihood = determine_spam_likelihood(spam_score)
 
-    # Display spam score, spam likelihood, and flagged spam keywords
-    print("Spam Score:", spam_score,
-          "\nLikelihood of spam:", spam_likelihood,
-          "\nWords and phrases that increased the spam score:",
+    # Calculate elapsed time
+    elapsed_time = timer()
+
+    # Display spam score, likelihood, flagged keywords, elapsed time
+    print("\nSpam Analysis Results:")
+    print("Spam Score:", spam_score)
+    print("Likelihood of spam:", spam_likelihood)
+    print("Words and phrases that increased the spam score:",
           ", ".join(flagged_keywords))
+    print(f"\nElapsed time: {elapsed_time:.2f} seconds")
 
 
 if __name__ == "__main__":
