@@ -169,9 +169,8 @@ Functions/Methods:
 
     Functions/Methods in the Main Script
         main():
-            Description: The main function that runs the tests.
-            Usage: Prints a message indicating the start of tests and
-            runs the tests using unittest.main().
+            Description: The main function that runs the tests
+            using unittest.main().
         if __name__ == "__main__": main():
             Description: Ensures that the main function is executed
             only when the script is run directly, not when imported
