@@ -43,7 +43,7 @@ def input_valid_grade(exam_number):
     while True:
         try:
             # Prompt user for input
-            grade = float(input(
+            grade = int(input(
                 f"Enter the student's grade "
                 f"for Exam {exam_number}: "))
             # Ensure grade is non-negative
