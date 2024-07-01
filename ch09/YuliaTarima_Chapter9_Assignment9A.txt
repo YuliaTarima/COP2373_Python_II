@@ -150,22 +150,35 @@ Functions/Methods:
             Each method starts with test_ and checks a specific aspect of the BankAcct class.
             The assertEqual, assertFalse, and assertAlmostEqual methods are used to compare
             actual outcomes with expected results.
-                test_initial_balance(self): Tests if the initial balance is correctly
-                set to 1000.0.
-                test_adjust_interest_rate(self): Tests if the interest rate adjustment
-                to 3.0 works correctly.
-                test_deposit(self): Tests if depositing 500.0 increases the balance to 1500.0.
-                test_deposit_zero(self): Tests if depositing 0 fails and the balance remains
-                unchanged.
-                test_deposit_negative(self): Tests if depositing a negative amount fails
-                and the balance remains unchanged.
-                test_withdraw(self): Tests if withdrawing 200.0 decreases the balance to 800.0.
-                test_withdraw_more_than_available(self): Tests if attempting to withdraw 1500.0
-                (more than the available balance) fails and the balance remains 1000.0.
-                test_calculate_interest(self): Tests if interest calculation over 30 days
-                works correctly, comparing the result to the expected interest.
-                test_str(self): Tests if the string representation of the account matches
-                the expected format.
+                test_initial_balance(self):
+                    Tests if the initial balance is correctly
+                    set to 1000.0.
+                test_adjust_interest_rate(self):
+                    Tests if the interest rate adjustment
+                    to 3.0 works correctly.
+                test_deposit(self):
+                    Tests if depositing 500.0 increases the balance
+                    to 1500.0.
+                test_deposit_zero(self):
+                    Tests if depositing 0 fails and the balance remains
+                    unchanged.
+                test_deposit_negative(self):
+                    Tests if depositing a negative amount fails
+                    and the balance remains unchanged.
+                test_withdraw(self):
+                    Tests if withdrawing 200.0 decreases the balance
+                    to 800.0.
+                test_withdraw_more_than_available(self):
+                    Tests if attempting to withdraw 1500.0
+                    (more than the available balance) fails and
+                    the balance remains 1000.0.
+                test_calculate_interest(self):
+                    Tests if interest calculation over 30 days
+                    works correctly, comparing the result
+                    to the expected interest.
+                test_str(self):
+                    Tests if the string representation of the account
+                    matches the expected format.
 
     Functions/Methods in the Main Script
         main():
