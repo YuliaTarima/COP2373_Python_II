@@ -74,83 +74,118 @@ class BankAcct:
 # Define the TestBankAcct class
 # to test the functionalities of the BankAcct class
 class TestBankAcct(unittest.TestCase):
+    separator = "____________________________________\n"
+
     def setUp(self):
         # Set up the test case with an initial bank account instance
         self.account = BankAcct("John Doe", "1234567890", 1000.0, 2.5)
 
     def test_initial_balance(self):
-        # Test if the initial balance is correctly set
+        print(self.separator + "Testing initial balance")
+        # Compare expected and actual results; Print error message
+        # if test fails
         self.assertEqual(self.account.balance(), 1000.0,
-                         "Initial balance should be 1000.0"
-                         )
+                         "Error: Initial balance should be 1000.0")
+        # Print success message if test passes
+        print("Success: test_initial_balance passed")
 
     def test_adjust_interest_rate(self):
-        # Test if the interest rate adjustment works correctly
+        print(self.separator + "Testing interest rate adjustment")
         self.account.adjust_interest_rate(3.0)
+        # Compare expected and actual results; Print error message
+        # if test fails
         self.assertEqual(self.account.interest_rate, 3.0,
-                         "Interest rate should be adjusted to 3.0"
-                         )
+                         "Error: Interest rate should be adjusted "
+                         "to 3.0")
+        # Print success message if test passes
+        print("Success: test_adjust_interest_rate passed")
 
     def test_deposit(self):
-        # Test if deposit functionality works correctly
+        print(self.separator + "Testing deposit functionality")
         self.account.deposit(500.0)
+        # Compare expected and actual results; Print error message
+        # if test fails
         self.assertEqual(self.account.balance(), 1500.0,
-                         "Balance should be 1500.0 "
-                         "after depositing 500.0"
-                         )
+                         "Error: Balance should be 1500.0 after "
+                         "depositing 500.0")
+        # Print success message if test passes
+        print("Success: test_deposit passed")
 
     def test_deposit_zero(self):
-        # Test if depositing zero amount is handled correctly
+        print(self.separator + "Testing deposit of zero amount")
         success = self.account.deposit(0)
-        self.assertFalse(success, "Depositing zero should fail")
+        # Compare expected and actual results; Print error message
+        # if test fails
+        self.assertFalse(success,
+                         "Error: Depositing zero should fail")
         self.assertEqual(self.account.balance(), 1000.0,
                          "Balance should remain unchanged after "
-                         "attempting to deposit zero"
-                         )
+                         "attempting to deposit zero")
+        # Print success message if test passes
+        print("Success: test_deposit_zero passed")
 
     def test_deposit_negative(self):
-        # Test if depositing a negative amount is handled correctly
+        print(self.separator + "Testing deposit of negative amount")
         success = self.account.deposit(-100)
+        # Compare expected and actual results; Print error message
+        # if test fails
         self.assertFalse(success,
-                         "Depositing a negative amount should fail")
+                         "Error: Depositing a negative amount "
+                         "should fail")
         self.assertEqual(self.account.balance(), 1000.0,
-                         "Balance should remain unchanged after "
-                         "attempting to deposit a negative amount"
-                         )
+                         "Error: Balance should remain unchanged "
+                         "after attempting to deposit a negative "
+                         "amount")
+        # Print success message if test passes
+        print("Success: test_deposit_negative passed")
 
     def test_withdraw(self):
-        # Test if withdrawal functionality works correctly
+        print(self.separator + "Testing withdrawal functionality")
         self.account.withdraw(200.0)
+        # Compare expected and actual results; Print error message
+        # if test fails
         self.assertEqual(self.account.balance(), 800.0,
-                         "Balance should be 800.0 after "
-                         "withdrawing 200.0"
-                         )
+                         "Error: Balance should be 800.0 after "
+                         "withdrawing 200.0")
+        # Print success message if test passes
+        print("Success: test_withdraw passed")
 
     def test_withdraw_more_than_available(self):
-        # Test if withdrawing more than the available balance
-        # is handled correctly
+        print(
+            self.separator + "Testing withdrawal of amount greater "
+                             "than available balance")
         success = self.account.withdraw(1500.0)
+        # Compare expected and actual results; Print error message
+        # if test fails
         self.assertFalse(success,
-                         "Withdrawal of amount greater than "
-                         "available balance should fail"
-                         )
+                         "Error: Withdrawal of amount greater than "
+                         "available balance should fail")
         self.assertEqual(self.account.balance(), 1000.0,
-                         "Balance should remain unchanged "
-                         "after failed withdrawal"
-                         )
+                         "Error: Balance should remain unchanged "
+                         "after failed withdrawal")
+        # Print success message if test passes
+        print("Success: test_withdraw_more_than_available passed")
 
     def test_calculate_interest(self):
-        # Test interest calculation over a given number of days
+        print(
+            self.separator + "Testing interest calculation over a "
+                             "given number of days")
         interest = self.account.calculate_interest(30)
         expected_interest = self.account.amount * (
                 2.5 / 100) / 365 * 30
+        # Compare expected and actual results; Print error message
+        # if test fails
         self.assertAlmostEqual(interest, expected_interest,
-                               msg="Calculated interest should match "
-                                   "the expected interest for 30 days"
-                               )
+                               msg="Error: Calculated interest "
+                                   "should match the expected "
+                                   "interest for 30 days")
+        # Print success message if test passes
+        print("Success: test_calculate_interest passed")
 
     def test_str(self):
-        # Test the string representation of the account summary
+        print(
+            self.separator + "Testing string representation of the "
+                             "account summary")
         account_str = str(self.account)
         expected_str = (f"Account Summary:"
                         f"\n____________________"
@@ -158,10 +193,13 @@ class TestBankAcct(unittest.TestCase):
                         f"\nAccount Number: 1234567890"
                         f"\nCurrent Balance: $1000.0"
                         f"\nInterest Rate: 2.5%")
+        # Compare expected and actual results; Print error message
+        # if test fails
         self.assertEqual(account_str, expected_str,
-                         "String representation of the account "
-                         "should match the expected format"
-                         )
+                         "Error: String representation of the "
+                         "account should match the expected format")
+        # Print success message if test passes
+        print("Success: test_str passed")
 
 
 # Define the main function to run the tests
