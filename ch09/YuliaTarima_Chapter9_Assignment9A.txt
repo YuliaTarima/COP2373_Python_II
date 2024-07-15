@@ -1,8 +1,8 @@
 
- Technical Design Document
+Technical Design Document
 
- Yulia Tarima, 06/30/2024
- https://github.com/YuliaTarima/COP2373_Python_II.git
+Yulia Tarima, 06/30/2024
+https://github.com/YuliaTarima/COP2373_Python_II.git
 
 This program creates a BankAcct Class
 with the following state information:

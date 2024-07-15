@@ -1,10 +1,18 @@
 Technical Design Document: Money Class Implementation
 
+Yulia Tarima, 07/14/2024
+https://github.com/YuliaTarima/COP2373_Python_II.git
+
 1. Overview:
-   The `Money` class extends Python's `Decimal` class to represent monetary amounts with specified units. It provides arithmetic operations like addition, subtraction, and multiplication while ensuring that operations are only valid between instances with the same units.
+   The `Money` class extends Python's `Decimal` class
+   to represent monetary amounts with specified units.
+   It provides arithmetic operations like addition, subtraction,
+   and multiplication while ensuring that operations are only valid
+   between instances with the same units.
 
 2. Class Structure:
-   - `Money(v, units='USD')`: Constructor initializes a `Money` object with an amount `v` and units `units`.
+   - `Money(v, units='USD')`: Constructor initializes a `Money` object
+   with an amount `v` and units `units`.
    - `__repr__()`: Returns a string representation of the `Money` object.
    - `__add__(other)`: Adds two `Money` objects if they have the same units.
    - `__sub__(other)`: Subtracts two `Money` objects if they have the same units.
@@ -12,7 +20,8 @@ Technical Design Document: Money Class Implementation
    - `__rmul__(other)`: Allows multiplication in reverse order (scalar * `Money`).
 
 3. Error Handling:
-   - Assertions are used to ensure that operations (`+`, `-`) are only performed between `Money` objects with matching units.
+   - Assertions are used to ensure that operations (`+`, `-`) are only
+   performed between `Money` objects with matching units.
 
 4. Testing:
    - `test_money_class()`: Function to validate the functionality of the `Money` class.
@@ -51,4 +60,5 @@ print(f'3 * m2 = {m6}')   # Output: Money(62.25, USD)
 try:
     m7 = m1 + Money('50.25', 'EUR')  # Raises AssertionError
 except AssertionError as e:
-    print(f"AssertionError: {e}")    # Output: AssertionError: Cannot add money with different units
+    print(f"AssertionError: {e}")    # Output: AssertionError:
+    Cannot add money with different units
