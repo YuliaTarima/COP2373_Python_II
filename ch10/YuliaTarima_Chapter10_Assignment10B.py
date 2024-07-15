@@ -1,4 +1,4 @@
-# YuliaTarima_Chapter9_Assignment9A
+# YuliaTarima_Chapter10_Assignment10B
 
 """
 Using the inheritance approach, class definition of Money
