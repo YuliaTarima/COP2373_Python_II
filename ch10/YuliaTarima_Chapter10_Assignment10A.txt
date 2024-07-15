@@ -1,0 +1,54 @@
+Technical Design Document: Money Class Implementation
+
+1. Overview:
+   The `Money` class extends Python's `Decimal` class to represent monetary amounts with specified units. It provides arithmetic operations like addition, subtraction, and multiplication while ensuring that operations are only valid between instances with the same units.
+
+2. Class Structure:
+   - `Money(v, units='USD')`: Constructor initializes a `Money` object with an amount `v` and units `units`.
+   - `__repr__()`: Returns a string representation of the `Money` object.
+   - `__add__(other)`: Adds two `Money` objects if they have the same units.
+   - `__sub__(other)`: Subtracts two `Money` objects if they have the same units.
+   - `__mul__(other)`: Multiplies a `Money` object by a scalar (int or float).
+   - `__rmul__(other)`: Allows multiplication in reverse order (scalar * `Money`).
+
+3. Error Handling:
+   - Assertions are used to ensure that operations (`+`, `-`) are only performed between `Money` objects with matching units.
+
+4. Testing:
+   - `test_money_class()`: Function to validate the functionality of the `Money` class.
+     - Creates instances of `Money` with different values and units.
+     - Performs arithmetic operations (+, -, *) between `Money` objects and scalar values.
+     - Verifies that operations between different currency units raise `AssertionError`.
+
+5. Dependencies:
+   - Requires Python's `decimal` module for precise arithmetic operations with floating-point numbers.
+
+6. Usage:
+   - Instantiate `Money` objects with a numeric value and optionally specify the currency units.
+   - Perform arithmetic operations using standard operators (+, -, *).
+
+Example Usage:
+```python
+m1 = Money('100.50', 'USD')
+m2 = Money('20.75', 'USD')
+
+print(f'm1: {m1}')  # Output: Money(100.5, USD)
+print(f'm2: {m2}')  # Output: Money(20.75, USD)
+
+m3 = m1 + m2
+print(f'm1 + m2 = {m3}')  # Output: Money(121.25, USD)
+
+m4 = m1 - m2
+print(f'm1 - m2 = {m4}')  # Output: Money(79.75, USD)
+
+m5 = m1 * 2
+print(f'm1 * 2 = {m5}')   # Output: Money(201.0, USD)
+
+m6 = 3 * m2
+print(f'3 * m2 = {m6}')   # Output: Money(62.25, USD)
+
+# Test invalid operation
+try:
+    m7 = m1 + Money('50.25', 'EUR')  # Raises AssertionError
+except AssertionError as e:
+    print(f"AssertionError: {e}")    # Output: AssertionError: Cannot add money with different units
