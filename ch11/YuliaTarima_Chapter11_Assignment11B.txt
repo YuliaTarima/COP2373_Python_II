@@ -1,0 +1,80 @@
+
+Technical Design Document: Right Triangle Hypotenuse Calculator
+
+Yulia Tarima, 07/18/2024
+https://github.com/YuliaTarima/COP2373_Python_II.git
+
+1. Overview
+    The program calculates the length of the hypotenuse of a right triangle,
+    given the angle adjacent to the hypotenuse (in degrees)
+    and the length of the side adjacent to this angle.
+    The user is prompted to input the angle and the side length,
+    with validation to ensure correct values are entered.
+    The hypotenuse is calculated using trigonometric functions.
+
+2. Requirements
+    Inputs:
+        Angle in degrees (between 0 and 90, exclusive).
+        Length of the side adjacent to the given angle (positive number).
+    Output:
+       Length of the hypotenuse.
+    Validation:
+        The angle must be more than 0 and less than 90 degrees.
+        The length of the side must be a positive number.
+
+3. System Design
+    3.1 calculate_hypotenuse Function
+        Purpose:
+          To calculate the length of the hypotenuse based on the given angle and adjacent side.
+        Inputs:
+            angle_degrees: Angle in degrees (float).
+            adjacent_side: Length of the adjacent side (float).
+        Outputs:
+            Length of the hypotenuse (float).
+        Algorithm:
+            Convert the angle from degrees to radians using math.radians().
+            Compute the hypotenuse using the formula:
+            hypotenuse = adjacent_side / cos(angle_radians)
+            Return the computed hypotenuse.
+    3.2 get_valid_angle Function
+        Purpose:
+            To repeatedly prompt the user for a valid angle until correct input is entered.
+        Inputs:
+            None.
+        Outputs:
+            A valid angle in degrees (float).
+        Algorithm:
+            Use a while True loop to continually prompt the user.
+            Attempt to convert the input to a float.
+            Check if the angle is more than 0 and less than 90 degrees.
+            If valid, return the angle. If not, print an error message and prompt again.
+            Handle invalid numeric inputs with appropriate error messages.
+    3.3 main Function
+        Purpose:
+           To control the overall flow of the program, including user input and hypotenuse calculation.
+        Inputs:
+            None (inputs are collected within this function).
+        Outputs:
+            Displays the length of the hypotenuse.
+        Algorithm:
+            Call get_valid_angle() to obtain a valid angle from the user.
+            Prompt the user for the length of the adjacent side, ensuring it's positive.
+            Call calculate_hypotenuse() to compute the length of the hypotenuse.
+            Print the calculated hypotenuse.
+
+4. Error Handling
+    Invalid Angle Input:
+        Ensure that the angle is more than 0 and less than 90 degrees.
+        Prompt user repeatedly until a valid angle is entered.
+        Invalid Side Length Input:
+        Ensure that the side length is a positive number.
+        Repeatedly prompted for input until a valid number is provided.
+    Non-Numeric Input:
+        Used try-except blocks to catch and handle non-numeric inputs.
+
+5. User Interface
+    Input Prompts:
+        "Enter the angle in degrees (more than 0 and less than 90): "
+        "Enter the length of the adjacent side: "
+    Output:
+       "The length of the hypotenuse is: [value]"
