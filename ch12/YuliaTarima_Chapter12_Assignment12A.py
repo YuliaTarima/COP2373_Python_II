@@ -1,3 +1,5 @@
+# YuliaTarima_Chapter12_Assignment12A
+
 """
 This program loads the student data from the CSV file 
 into a numpy array and prints the first 3 rows in a tabular format.
