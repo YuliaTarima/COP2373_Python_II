@@ -1,8 +1,9 @@
-import csv
 """
 This Python script reads and displays the contents of a CSV file 
 named grades.csv in a tabular format. 
 """
+import csv
+
 def read_and_display_grades():
     # Open the grades.csv file in read mode
     with open('grades.csv', 'r') as file:
