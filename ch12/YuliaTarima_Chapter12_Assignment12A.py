@@ -31,23 +31,53 @@ import numpy as np
 
 def load_data(filename):
     """Load data from a CSV file and return as a NumPy array."""
-    with open(filename, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        data = []
-        for row in reader:
-            data.append([float(row['Exam 1']), float(row['Exam 2']),
-                         float(row['Exam 3'])])
-        return np.array(data)
+    return np.genfromtxt(filename, delimiter=',', skip_header=1,
+                         usecols=(2, 3, 4))
 
 
-def print_statistics(exam_grades, exam_name):
-    """Print statistics for a given exam."""
-    print(f"\n{exam_name}:")
-    print(f"  Mean: {np.mean(exam_grades):.2f}")
-    print(f"  Median: {np.median(exam_grades):.2f}")
-    print(f"  Standard deviation: {np.std(exam_grades):.2f}")
-    print(f"  Minimum: {np.min(exam_grades):.2f}")
-    print(f"  Maximum: {np.max(exam_grades):.2f}")
+def calculate_statistics(exam_grades):
+    """Calculate statistics for a given exam."""
+    return np.array([
+        np.mean(exam_grades),
+        np.median(exam_grades),
+        np.std(exam_grades),
+        np.min(exam_grades),
+        np.max(exam_grades)
+    ])
+
+
+def format_statistics_table(statistics, exam_names, table_title):
+    """Format statistics in a tabular format."""
+    headers = ["", "Mean", "Median", "Standard Deviation", "Minimum",
+               "Maximum"]
+    header_row = "{:<8} {:>8} {:>8} {:>19} {:>8} {:>8}".format(
+        *headers)
+    print(f"\n{table_title}")
+    print("-" * len(header_row))
+    print(header_row)
+    print("-" * len(header_row))
+
+    for exam_name, stats in zip(exam_names, statistics):
+        stat_row = ("{:<8} {:>8.2f} {:>8.2f} {:>19.2f} {:>8.2f} {"
+                    ":>8.2f}").format(
+            exam_name, *stats)
+        print(stat_row)
+    print("-" * len(header_row))
+
+
+def format_pass_fail_table(pass_fail_stats, exam_names):
+    """Format pass/fail statistics in a tabular format."""
+    headers = ["", "Number Passed", "Number Failed"]
+    header_row = "{:<8} {:>14} {:>13}".format(*headers)
+    print("\nPass/Fail Statistics for Each Exam:")
+    print("-" * len(header_row))
+    print(header_row)
+    print("-" * len(header_row))
+
+    for exam_name, stats in zip(exam_names, pass_fail_stats):
+        stat_row = "{:<8} {:>14} {:>13}".format(exam_name, *stats)
+        print(stat_row)
+    print("-" * len(header_row))
 
 
 def main():
@@ -55,51 +85,38 @@ def main():
     grades = load_data('grades.csv')
 
     # Print the first 3 rows
-    print("\n-----------------------\n"
-          "First 3 rows of the data:"
-          "\n-----------------------")
+    print("\nFirst 3 Rows of Data:"
+          "\n---------------------")
     for row in grades[:3]:
         print(f"{row}")
+    print("---------------------")
 
-    # Calculate and print statistics for each exam
-    print("\n----------------------\n"
-          "Statistics for each exam:"
-          "\n----------------------")
+    # Calculate statistics for each exam
     exam_names = ['Exam 1', 'Exam 2', 'Exam 3']
-    for i, exam_name in enumerate(exam_names):
-        exam_grades = grades[:, i]
-        print_statistics(exam_grades, exam_name)
+    statistics = np.apply_along_axis(calculate_statistics, 0, grades)
+    format_statistics_table(statistics.T, exam_names,
+                            "Statistics Per Each Exam:")
 
     # Calculate overall statistics across all exams
-    all_grades = grades.flatten()
-    print("\n----------------------------------\n"
-          "Overall statistics across all exams:"
-          "\n----------------------------------")
-    print_statistics(all_grades, "All Exams")
+    overall_statistics = calculate_statistics(grades.flatten())
+    format_statistics_table([overall_statistics], ["All Exams"],
+                            "Overall Statistics Across All Exams:")
 
     # Determine the number of students who passed and failed each exam
     passing_grade = 60
-    print("\n---------------------------------\n"
-          "Pass/Fail statistics for each exam:"
-          "\n---------------------------------")
-    for i, exam_name in enumerate(exam_names):
-        exam_grades = grades[:, i]
-        num_passed = np.sum(exam_grades >= passing_grade)
-        num_failed = len(exam_grades) - num_passed
-        print(f"\n{exam_name}:")
-        print(f"  Number passed: {num_passed}")
-        print(f"  Number failed: {num_failed}")
+    pass_fail_stats = [(np.sum(grades[:, i] >= passing_grade),
+                        np.sum(grades[:, i] < passing_grade)) for i in
+                       range(3)]
+    format_pass_fail_table(pass_fail_stats, exam_names)
 
     # Calculate overall pass percentage across all exams
-    num_students = len(all_grades)
-    num_passed_total = np.sum(all_grades >= passing_grade)
+    num_students = grades.size
+    num_passed_total = np.sum(grades >= passing_grade)
     pass_percentage = (num_passed_total / num_students) * 100
-    print(
-        f"\n--------------------------------------\n"
-        "Overall pass percentage across all exams:"
-        "\n---------------------------------------\n"
-        f"{pass_percentage:.2f}%"
-    )
+    print(f"\nOverall Pass Percentage Across All Exams:"
+          f"\n---------------------------------------------------"
+          f"\n{pass_percentage:.2f}%"
+          f"\n---------------------------------------------------\n")
 
 
 if __name__ == "__main__":

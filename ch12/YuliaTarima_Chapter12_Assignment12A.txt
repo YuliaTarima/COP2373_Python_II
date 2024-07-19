@@ -1,80 +1,93 @@
 
-Technical Design Document: Student Grades Statistics
+Technical Design Document: Student Grades Statistics Processor
 
 Yulia Tarima, 07/19/2024
 https://github.com/YuliaTarima/COP2373_Python_II.git
 
-1. Overview
-    The program calculates the length of the hypotenuse of a right triangle,
-    given the angle adjacent to the hypotenuse (in degrees)
-    and the length of the side adjacent to this angle.
-    The user is prompted to input the angle and the side length,
-    with validation to ensure correct values are entered.
-    The hypotenuse is calculated using trigonometric functions.
+Overview
+    This program is designed to process and analyze student exam grades
+    stored in a CSV file.
+    It utilizes Python and the NumPy library to perform statistical
+    calculations and format the results in a clear and readable
+    tabular format that is easy to interpret.
+    The code is modular, making it easy to maintain and extend.
 
-2. Requirements
-    Inputs:
-        Angle in degrees (between 0 and 90, exclusive).
-        Length of the side adjacent to the given angle (positive number).
+Objectives
+    Load student exam grades from a CSV file into a NumPy array.
+    Print the first 3 rows of data in a tabular format.
+    Calculate and print the following statistics for each exam:
+        Mean (average)
+        Median
+        Standard deviation
+        Minimum
+        Maximum
+    Calculate and print overall statistics across all exams combined.
+    Determine and print the number of students who passed and failed each exam.
+    Calculate and print the overall pass percentage across all exams.
+
+Design
+    1. Load Data
+    Function:
+        load_data(filename)
+    Description:
+        Load data from a CSV file and return it as a NumPy array.
+        Utilizes np.genfromtxt to read the CSV file and skip
+        the header row.
+        Only the columns corresponding to exam grades
+        (Exam 1, Exam 2, Exam 3) are loaded.
+    Input:
+        CSV filename
     Output:
-       Length of the hypotenuse.
-    Validation:
-        The angle must be more than 0 and less than 90 degrees.
-        The length of the side must be a positive number.
+        NumPy array containing exam grades
 
-3. System Design
-    3.1 calculate_hypotenuse Function
-        Purpose:
-          To calculate the length of the hypotenuse based on the given angle and adjacent side.
-        Inputs:
-            angle_degrees: Angle in degrees (float).
-            adjacent_side: Length of the adjacent side (float).
-        Outputs:
-            Length of the hypotenuse (float).
-        Algorithm:
-            Convert the angle from degrees to radians using math.radians().
-            Compute the hypotenuse using the formula:
-            hypotenuse = adjacent_side / cos(angle_radians)
-            Return the computed hypotenuse.
-    3.2 get_valid_angle Function
-        Purpose:
-            To repeatedly prompt the user for a valid angle until correct input is entered.
-        Inputs:
-            None.
-        Outputs:
-            A valid angle in degrees (float).
-        Algorithm:
-            Use a while True loop to continually prompt the user.
-            Attempt to convert the input to a float.
-            Check if the angle is more than 0 and less than 90 degrees.
-            If valid, return the angle. If not, print an error message and prompt again.
-            Handle invalid numeric inputs with appropriate error messages.
-    3.3 main Function
-        Purpose:
-           To control the overall flow of the program, including user input and hypotenuse calculation.
-        Inputs:
-            None (inputs are collected within this function).
-        Outputs:
-            Displays the length of the hypotenuse.
-        Algorithm:
-            Call get_valid_angle() to obtain a valid angle from the user.
-            Prompt the user for the length of the adjacent side, ensuring it's positive.
-            Call calculate_hypotenuse() to compute the length of the hypotenuse.
-            Print the calculated hypotenuse.
+    2. Calculate Statistics
+        Function:
+            calculate_statistics(exam_grades)
+        Description:
+            Uses NumPy functions to calculate the required statistics
+            (mean, median, standard deviation, minimum, maximum)
+            for a given set of exam grades.
+        Input:
+            NumPy array of exam grades
+        Output:
+            Returns the calculated statistics as a NumPy array
+            for easy manipulation and printing.
 
-4. Error Handling
-    Invalid Angle Input:
-        Ensure that the angle is more than 0 and less than 90 degrees.
-        Prompt user repeatedly until a valid angle is entered.
-        Invalid Side Length Input:
-        Ensure that the side length is a positive number.
-        Repeatedly prompted for input until a valid number is provided.
-    Non-Numeric Input:
-        Used try-except blocks to catch and handle non-numeric inputs.
+    3. Format Statistics Table
+        Function:
+            format_statistics_table(statistics, exam_names, table_title)
+        Description:
+            Format and print statistics in a tabular format.
+            Dynamically adjusts the column widths
+            to ensure proper alignment.
+        Input:
+            statistics: List of statistics for each exam
+            exam_names: List of exam names
+            table_title: Title of the table
+        Output: Printed table of statistics
 
-5. User Interface
-    Input Prompts:
-        "Enter the angle in degrees (more than 0 and less than 90): "
-        "Enter the length of the adjacent side: "
-    Output:
-       "The length of the hypotenuse is: [value]"
+    4. Format Pass/Fail Table
+        Function:
+            format_pass_fail_table(pass_fail_stats, exam_names)
+        Description:
+            Format and print pass/fail statistics in a tabular format
+            to clearly distinguishes between the number of students
+            who passed and failed each exam.
+        Input:
+            pass_fail_stats: List of pass/fail counts for each exam
+            exam_names: List of exam names
+        Output:
+            Printed table of pass/fail statistics
+
+    5. Main Function
+        Function:
+            main()
+        Description:
+            Main function to orchestrate the loading of data,
+            calculation of statistics, and printing of results.
+            Provides clear and formatted output
+            for easy interpretation of the data.
+        Input:
+            None
+        Output:
+            Printed tables of data and statistics
