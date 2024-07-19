@@ -1,4 +1,171 @@
-Technical Design Document
+Technical Design Document: Plotting 20-year Population Growth Per City
 
 Yulia Tarima, 07/19/2024
 https://github.com/YuliaTarima/COP2373_Python_II.git
+
+Overview
+    The program manages and analyzes population data for the 10
+    most visited cities in Florida.
+    It uses SQLite to store and manage the data
+    and matplotlib to visualize population growth over time.
+
+Components
+
+    Database Management
+        Objective:
+            Create and manage an SQLite database
+            to store population data.
+        Functionality:
+            Delete existing database if present.
+            Create a new database with a table for population data.
+            Populate the table with initial data for the year 2023.
+            Simulate population growth for the next 20 years
+            and insert this data into the database.
+
+    Data Visualization
+        Objective:
+            Visualize population growth for a selected city.
+        Functionality:
+            Prompt the user to select a city from a predefined list.
+            Display the population data for the selected city.
+            Plot population growth over time using matplotlib.
+Functions
+
+    1. delete_existing_db(db_path)
+        Description:
+            Deletes the SQLite database file if it exists.
+        Parameters:
+            db_path (str): The file path of the SQLite database.
+        Returns:
+            None
+        Exceptions:
+            FileNotFoundError: Raised if the database file
+            does not exist.
+
+    2. create_and_populate_db()
+        Description:
+            Creates a new SQLite database and populates it
+            with initial data for the year 2023.
+            Simulates population growth for the next 20 years
+            and inserts this data into the database.
+        Parameters:
+            None
+        Returns:
+            None
+        Exceptions:
+            sqlite3.Error: Handles errors related to SQLite operations.
+
+    3. simulate_population_growth(
+                    cursor, cities, start_year, num_years, growth_rate)
+        Description:
+            Simulates population growth for a specified number
+            of years at a given growth rate.
+            Inserts the simulated data into the database.
+        Parameters:
+            cursor (sqlite3.Cursor):
+                The SQLite cursor object for database operations.
+            cities (dict):
+                Dictionary containing city names
+                and their initial populations.
+            start_year (int):
+                The year to start simulation from.
+            num_years (int):
+                The number of years to simulate.
+            growth_rate (float):
+                The annual growth rate.
+        Returns:
+            None
+        Exceptions:
+            sqlite3.Error: Handles errors related to SQLite operations.
+
+    4. print_table_contents(cursor, city=None, year=None, population=None)
+        Description:
+            Prints the contents of the population table
+            based on optional filters (city, year, and population).
+
+        Parameters:
+            cursor (sqlite3.Cursor):
+                The SQLite cursor object for database operations.
+            city (str, optional):
+                Filter by city name.
+            year (int, optional):
+                Filter by year.
+            population (int, optional):
+                Filter by population.
+        Returns:
+            None
+        Exceptions:
+            sqlite3.Error:
+                Handles errors related to SQLite operations.
+            ValueError:
+                Raised if the provided filter parameters
+                are not of the expected type.
+
+    5. plot_population_growth(city)
+        Description:
+            Plots the population growth for a selected city
+            using matplotlib.
+        Parameters:
+            city (str):
+                The name of the city for which to plot
+                population growth.
+        Returns:
+            None
+        Exceptions:
+            sqlite3.Error:
+                Handles errors related to SQLite operations.
+            matplotlib.pyplot:
+                Handles errors related to plotting.
+
+    6. select_city_and_plot()
+        Description:
+            Prompts the user to select a city, prints
+            the population data for that city,
+            and plots its population growth.
+        Parameters:
+            None
+        Returns:
+            None
+        Exceptions:
+            ValueError:
+                Raised if the user input is not a valid number.
+            sqlite3.Error:
+                Handles errors related to SQLite operations.
+
+    7. main()
+        Description:
+            The main entry point of the program.
+            Executes database creation and population,
+            and then prompts the user to select a city
+            and shows its population growth.
+        Parameters:
+            None
+        Returns:
+            None
+        Exceptions:
+            Calls other functions which handle exceptions internally.
+
+Flow Diagram
+    Start
+    Create and Populate Database
+        Delete existing database (if exists).
+        Create a new database.
+        Populate database with initial data for 2023.
+        Simulate population growth for the next 20 years.
+    User Interaction
+        Display list of cities.
+        Prompt user to select a city.
+        Print the population data for the selected city.
+        Plot the population growth for the selected city.
+    End
+
+Error Handling
+    File Operations:
+        Check if the database file exists before attempting deletion.
+    Database Operations:
+        Use try-except blocks to handle SQLite errors.
+    User Input:
+        Validate user input for city selection to ensure
+        it is within the valid range.
+    Plotting:
+        Handle errors related to data retrieval and plotting.
